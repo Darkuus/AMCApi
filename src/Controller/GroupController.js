@@ -38,19 +38,19 @@ module.exports = {
         const { id } = request.params;
         const group = await Group.findById(id);
         const newGroup = {
+            administrator: {
+                name: group.administrator.name,
+                username: group.administrator.username,
+                email: group.administrator.email
+            },
             _id: group._id,
-            // administrator: [{
-            //     name: group.administrator.name,
-            //     username: group.administrator.username,
-            //     email: group.administrator.email
-            // }],
-            // title: group.title,
-            // revealDate: group.revealDate,
-            // minValue: group.minValue,
-            // maxValue: group.maxValue,
-            // revealPlaceLatitude: group.revealPlaceLatitude,
-            // revealPlaceLongetude: group.revealPlaceLongetude,
-            // members: group.members
+            title: group.title,
+            revealDate: group.revealDate,
+            minValue: group.minValue,
+            maxValue: group.maxValue,
+            revealPlaceLatitude: group.revealPlaceLatitude,
+            revealPlaceLongetude: group.revealPlaceLongetude,
+            members: group.members
         }
         return response.json(newGroup);
     }
