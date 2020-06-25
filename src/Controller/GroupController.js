@@ -9,8 +9,6 @@ module.exports = {
 
     async save(request, response){
         const { title, administrator, revealDate, minValue, maxValue, revealPlaceLatitude, revealPlaceLongetude, members } = request.body;
-        
-        console.log(administrator);
 
         const result = await Group.create({
             title,
