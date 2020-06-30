@@ -5,26 +5,32 @@ const PessoaSchema = new mongoose.Schema({
         type: String,
         required: true 
     },
+    username: {
+        type: String,
+        required: true,
+    },
+    profilePic: {
+        type: String,
+    },
     email: { 
         type: String,
         required: true,
         unique: true 
     },
     birthdate: {
-        type: Date
-    },
-    username: {
-        type: String,
-        required: true,
-    },
+        type: Date,
+        required: true
+    },    
     password: { 
         type: String,
         required: true 
     },
-    tokens: [{
-        token:{
+    wishList:[{
+        productName: {
             type: String,
-            required: true
+        },
+        estimatedPrice: {
+            type: Number
         }
     }]
 });

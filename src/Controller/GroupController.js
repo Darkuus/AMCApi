@@ -1,4 +1,5 @@
 const Group = require('../Models/Group');
+const Pessoa = require('../Models/Pessoa');
 
 module.exports = {
     async getAll(request, response){
@@ -29,7 +30,7 @@ module.exports = {
 
         await Group.findByIdAndDelete(id);
 
-        return response.json({status: 1});
+        return response.json({status: 200});
     },
 
     async getOne (request, response) {
@@ -51,5 +52,44 @@ module.exports = {
             members: group.members
         }
         return response.json(newGroup);
-    }
+    },
+
+    async getAllByUsername (request, response) {
+        const { username } = request.params;
+        await Group.find({ 'members.username': username})
+        .then((groups) => {
+            return response.json(groups);
+        })
+        .catch((err) => {
+            return response.json('You aren`t part of any groups right now.');
+        });
+    },
+
+    async getNonMembers (request, response) {
+        const { id } = request.params;
+        const usernames = await Group.findOne({_id: id},'-_id').select('members.username');
+        var aray = new Array();
+        usernames.members.map(x => {
+            aray.push(x.username);
+        });
+        const members = await Pessoa.find({username : {$nin: aray}})
+        .then((members) => {
+            return response.json(members);
+        })
+        .catch((err) => {
+            return response.json(err);
+        });
+    },
+
+    async saveMember(request, response){
+        const { groupId, memberSelected } = request.body;
+
+        const group = await Group.findById(groupId);
+        group.members.push(memberSelected);
+        group.save().then(result => {
+            console.log("oh heeeeeey", result);
+        });
+
+        return response.json(result);
+    },
 }

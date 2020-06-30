@@ -1,30 +1,41 @@
 const Pessoa = require('../Models/Pessoa');
+const mongoose = require('mongoose');
 
 module.exports = {
     async getAll(request, response){
-        console.log('hey');
         const result = await Pessoa.find();
         return response.json(result);
     },
 
     async save(request, response){
-        const { name, email, birthdate, username, password } = request.body;
+        try{
+            const { name, username, profilePic, email, birthdate, password } = request.body;
 
-        const result = await Pessoa.save({
-            name,
-            email,
-            birthdate,
-            username,
-            password
-        });
+            var ent = new Pessoa({
+                name,
+                birthdate,
+                profilePic,
+                email,
+                username,
+                password,
+            });
 
-        return response.json(result);
+            ent.save()
+                .then((user) => {
+                    return response.json(result = {data : user, message : "Some fields are not filled."});
+                })
+                .catch((err) => {
+                    return response.json(result = {message : err.message});
+                });
+        }
+        catch(err){
+           return("damn");
+        }
     },
 
     async getOneByUsername(request, response){
         const {username} = request.query;
-        const result  = await Pessoa.find({username : username});
-        
+        const result  = await Pessoa.findOne({username : username});
         return response.json(result);
     }
 }

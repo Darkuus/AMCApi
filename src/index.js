@@ -12,4 +12,4 @@ app.use(cors({
 app.use(express.json());
 app.use(routes);
 
-app.listen(process.event.PORT || port);
+app.listen(port);
