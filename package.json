@@ -15,7 +15,7 @@
     "mongoose": "^5.9.12"
   },
   "scripts": {
-    "build": "env-cmd -f ./.env nodemon src/index.js",
+    "build": "env-cmd -f ./.env node src/index.js",
     "start": "node index.js"
   },
   "devDependencies": {
