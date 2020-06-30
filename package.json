@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "env-cmd -f ./.env nodemon src/index.js",
-    "start": "env-cmd -f ./.env nodemon src/index.js"
+    "start": "node index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

@@ -1,1 +1,1 @@
-web: env-cmd -f ./.env nodemon src/index.js
+web: node index.js
