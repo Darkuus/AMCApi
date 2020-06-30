@@ -12,4 +12,10 @@ app.use(cors({
 app.use(express.json());
 app.use(routes);
 
-app.listen(process.eventNames.PORT || 3333);
+const host = '0.0.0.0';
+const port = process.env.PORT || 3333;
+
+app.listen(port, host, function() {
+    console.log("Server started.......");
+});
+//app.listen(process.eventNames.PORT || 3333);
