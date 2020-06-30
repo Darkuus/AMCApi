@@ -25,6 +25,7 @@ routes.get('/Pessoa/getOneByUsername', PessoaController.getOneByUsername);
 routes.get('/Pessoa/getNonMembers/:id', auth, GroupController.getNonMembers);
 
 routes.post('/Authentication/Login', AuthenticationController.login);
+routes.post('/Authentication/LoginM', AuthenticationController.loginM);
 
 routes.get('/Group/getAll', auth, GroupController.getAll);
 routes.get('/Group/getAllByUsername/:username', auth, GroupController.getAllByUsername);
